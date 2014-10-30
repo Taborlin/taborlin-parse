@@ -1,0 +1,37 @@
+{
+  "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
+  "name": "topdoc-parse",
+  "description": "A tool to parse Topdoc comments",
+  "version": "0.0.1",
+  "repository": "git@github.com:topcoat/topdoc-parse.git",
+  "keywords": [
+    "css",
+    "style",
+    "documentation",
+    "usage"
+  ],
+  "licenses": [
+    {
+      "type": "Apache 2.0",
+      "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+    }
+  ],
+  "main": "./topdoc-parse",
+  "scripts": {
+    "test": "./node_modules/.bin/mocha --reporter dot --require should"
+  },
+  "dependencies": {
+    "clean-css": "2.2.16",
+    "css-parse": "2.0.0",
+    "js-yaml": "3.2.2",
+    "path": "0.4.9",
+    "topdoc-utils": "0.0.2"
+  },
+  "devDependencies": {
+    "mocha": "1.11.0",
+    "should": "1.2.2"
+  },
+  "engines": {
+    "node": "*"
+  }
+}
