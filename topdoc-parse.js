@@ -26,7 +26,7 @@ var CleanCSS = require('clean-css');
 var TopdocParse = (function() {
   function TopdocParse(source, data) {
     this.source = source;
-    this.data = data;
+    this.data = data || {};
     this.cssParseResults = this.cssParse();
     this.minified = new CleanCSS().minify(this.source);
     this.results = this.topdocParse();
