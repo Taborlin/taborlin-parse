@@ -27,14 +27,17 @@
   describe('TopdocParse', function() {
     before(function() {
       this.documentSourcePath = path.join('test', 'cases', 'simple', 'button.css');
-      this.TopdocParse = new TopdocParse(read(this.documentSourcePath, 'utf8'));
+      var data = {
+        "title": "Button",
+        "filename": "button.css",
+        "source": "test/cases/simple/button.css",
+        "template": "lib/template.jade"
+      }
+      this.TopdocParse = new TopdocParse(read(this.documentSourcePath, 'utf8'), data);
     });
     it('exists', function() {
       TopdocParse.should.be.ok;
       this.TopdocParse.should.be.instanceOf(TopdocParse);
-    });
-    it('has a sourcePath css file property', function() {
-      this.TopdocParse.sourcePath.should.equal(this.documentSourcePath);
     });
     it('should parse the css file', function() {
       var caseCSSJson, parsedJson;
@@ -51,7 +54,7 @@
     });
     it('should generate json for template', function() {
       var caseTopdocJson, resultJson;
-      caseTopdocJson = read(path.join('test', 'cases', 'simple', 'button.topdoc.json'), 'utf8');
+      caseTopdocJson = read(path.join('test', 'cases', 'simple', 'button.topdoc.json'), 'utf8').trim();
       resultJson = JSON.stringify(this.TopdocParse.results, null, 2);
       resultJson.should.equal(caseTopdocJson);
     });
@@ -69,9 +72,6 @@
     });
     it('should generate dash separated slugs for template', function() {
       this.TopdocParse.results.components[1].slug.should.equal('topdoc-quiet-button-component');
-    });
-    it('should parse filename', function() {
-      this.TopdocParse.results.filename.should.equal('button.css');
     });
   });
 

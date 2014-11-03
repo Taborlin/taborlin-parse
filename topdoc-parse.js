@@ -20,13 +20,14 @@
 var cssParse = require('css-parse');
 var path = require('path');
 var yaml = require('js-yaml');
-var topdocutils = require('topdoc-utils');
+var TopdocUtils = require('topdoc-utils');
 var CleanCSS = require('clean-css');
 
 var TopdocParse = (function() {
   function TopdocParse(source, data) {
     this.source = source;
     this.data = data;
+    this.cssParseResults = this.cssParse();
     this.minified = new CleanCSS().minify(this.source);
     this.results = this.topdocParse();
   }
@@ -42,48 +43,36 @@ var TopdocParse = (function() {
   };
 
   TopdocParse.prototype.topdocParse = function() {
-    var filename, basename, name_array, component, css, cssLines, endCSSPos, i, listItem, nextItem, results, rules, sourceLines, startCSSPos, _i, _j, _len, _ref, _ref1;
-    sourceLines = this.source.split(/\n/g);
+    var sourceLines = this.source.split(/\n/g);
     this.validRegEx = /^ ?topdoc/;
-    filename = path.basename(this.sourcePath);
-    basename = filename.substring(0, filename.length - path.extname(filename).length);
-    name_array = basename.split('-');
-    results = {
-      title: topdocutils.titlify(path.basename(this.sourcePath)),
-      filename: filename,
-      source: this.sourcePath,
-      template: this.template,
-      minified: this.minified,
-      components: []
-    };
-    if(name_array.length === 3){
-      results.theme = name_array[2];
-      results.set = name_array[1];
-    }
-    rules = this.cssParseResults.stylesheet.rules;
-    for (i = _i = 0, _len = rules.length; _i < _len; i = ++_i) {
-      listItem = rules[i];
+    var results = this.data;
+    results.minified = this.minified;
+    results.components = [];
+    var rules = this.cssParseResults.stylesheet.rules;
+    for (var i = 0; i < rules.length; i++) {
+      var listItem = rules[i];
       if (this.isValidComment(listItem)) {
-        startCSSPos = listItem.position.end;
-        endCSSPos = null;
-        for (nextItem = _j = _ref = i + 1, _ref1 = rules.length; _j <= _ref1; nextItem = _j += 1) {
+        var startCSSPos = listItem.position.end;
+        var endCSSPos = null;
+        for (var nextItem = i + 1; nextItem <= rules.length; nextItem++) {
           if (this.isValidComment(rules[nextItem])) {
             endCSSPos = rules[nextItem].position.start;
             break;
           }
         }
+        var cssLines;
         if (endCSSPos) {
           cssLines = sourceLines.slice(startCSSPos.line, endCSSPos.line - 1);
         } else {
           cssLines = sourceLines.slice(startCSSPos.line);
         }
-        css = cssLines.join('\n');
+        var css = cssLines.join('\n');
         listItem.comment = listItem.comment.replace(this.validRegEx, '');
 
-        component = yaml.load(listItem.comment);
+        var component = yaml.load(listItem.comment);
         component.markup = this.parseMarkup(listItem.comment);
         component.css = css;
-        component.slug = topdocutils.slugify(component.name);
+        component.slug = TopdocUtils.slugify(component.name);
         results.components.push(component);
       }
     }
