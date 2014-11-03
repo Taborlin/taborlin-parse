@@ -2,7 +2,7 @@
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
   "name": "topdoc-parse",
   "description": "A tool to parse Topdoc comments",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "repository": "git@github.com:topcoat/topdoc-parse.git",
   "keywords": [
     "css",
