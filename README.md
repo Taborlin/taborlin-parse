@@ -1,6 +1,4 @@
-#Taborlin Parse [![Build Status](https://api.travis-ci.org/Taborlin/taborlin-parse.svg)](https://travis-ci.org/Taborlin/taborlin-parse)
-
-[![NPM](https://nodei.co/npm/taborlin-parse.png)](https://nodei.co/npm/taborlin-parse)
+# Taborlin Parse [![Build Status](https://api.travis-ci.org/Taborlin/taborlin-parse.svg)](https://travis-ci.org/Taborlin/taborlin-parse) [![npm](https://img.shields.io/npm/v/npm.svg)](https://www.npmjs.com/package/taborlin-parse)
 
 A library to parse [Taborlin](http://github.com/topcoat/taborlin) comments from a stylesheet.
 
