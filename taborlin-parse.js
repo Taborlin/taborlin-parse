@@ -20,19 +20,19 @@
 var cssParse = require('css-parse');
 var path = require('path');
 var yaml = require('js-yaml');
-var TopdocUtils = require('topdoc-utils');
+var TaborlinUtils = require('taborlin-utils');
 var CleanCSS = require('clean-css');
 
-var TopdocParse = (function() {
-  function TopdocParse(source, data) {
+var TaborlinParse = (function() {
+  function TaborlinParse(source, data) {
     this.source = source;
     this.data = data || {};
     this.cssParseResults = this.cssParse();
     this.minified = new CleanCSS().minify(this.source);
-    this.results = this.topdocParse();
+    this.results = this.taborlinParse();
   }
 
-  TopdocParse.prototype.cssParse = function() {
+  TaborlinParse.prototype.cssParse = function() {
     var cssParseResult;
     try {
       cssParseResult = cssParse(this.source, { position: true });
@@ -42,9 +42,9 @@ var TopdocParse = (function() {
     return cssParseResult;
   };
 
-  TopdocParse.prototype.topdocParse = function() {
+  TaborlinParse.prototype.taborlinParse = function() {
     var sourceLines = this.source.split(/\n/g);
-    this.validRegEx = /^ ?topdoc/;
+    this.validRegEx = /^ ?taborlin/;
     var results = this.data;
     results.minified = this.minified;
     results.components = [];
@@ -72,13 +72,13 @@ var TopdocParse = (function() {
         var component = yaml.load(listItem.comment);
         component.markup = this.parseMarkup(listItem.comment);
         component.css = css;
-        component.slug = TopdocUtils.slugify(component.name);
+        component.slug = TaborlinUtils.slugify(component.name);
         results.components.push(component);
       }
     }
     return results;
   };
-  TopdocParse.prototype.parseMarkup = function(comment) {
+  TaborlinParse.prototype.parseMarkup = function(comment) {
     var markup, commentEnd, indent;
     markup = comment;
     markup = markup.substring(markup.search(/markup:/)+7);
@@ -92,7 +92,7 @@ var TopdocParse = (function() {
     markup = markup.trim();
     return markup;
   };
-  TopdocParse.prototype.isValidComment = function(comment) {
+  TaborlinParse.prototype.isValidComment = function(comment) {
     var commentMatch;
     if (comment && comment.type === "comment") {
       commentMatch = this.validRegEx.exec(comment.comment);
@@ -103,8 +103,8 @@ var TopdocParse = (function() {
     return false;
   };
 
-  return TopdocParse;
+  return TaborlinParse;
 
 })();
 
-module.exports = TopdocParse;
+module.exports = TaborlinParse;

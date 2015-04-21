@@ -1,9 +1,9 @@
 {
   "author": "Garth Braithwaite <garthdb@gmail.com> (http://www.garthdb.com)",
-  "name": "topdoc-parse",
-  "description": "A tool to parse Topdoc comments",
+  "name": "taborlin-parse",
+  "description": "A tool to parse Taborlin comments",
   "version": "0.0.4",
-  "repository": "git@github.com:topcoat/topdoc-parse.git",
+  "repository": "git@github.com:topcoat/taborlin-parse.git",
   "keywords": [
     "css",
     "style",
@@ -16,7 +16,7 @@
       "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
     }
   ],
-  "main": "./topdoc-parse",
+  "main": "./taborlin-parse",
   "scripts": {
     "test": "./node_modules/.bin/mocha --reporter dot --require should"
   },
@@ -24,7 +24,7 @@
     "clean-css": "2.2.16",
     "css-parse": "2.0.0",
     "js-yaml": "3.2.2",
-    "topdoc-utils": "0.0.4"
+    "taborlin-utils": "0.0.4"
   },
   "devDependencies": {
     "mocha": "1.11.0",
