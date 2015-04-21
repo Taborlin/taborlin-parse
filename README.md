@@ -1,4 +1,4 @@
-#Taborlin Parse [![Build Status](https://travis-ci.org/topcoat/taborlin-parse.png)](https://travis-ci.org/topcoat/taborlin-parse)
+#Taborlin Parse [![Build Status](https://travis-ci.org/Taborlin/taborlin-parse.svg)](https://travis-ci.org/Taborlin/taborlin-parse)
 
 [![NPM](https://nodei.co/npm/taborlin-parse.png)](https://nodei.co/npm/taborlin-parse)
 
